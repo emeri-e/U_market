@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block chunk2 %}
+
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h4 class="font-weight-semi-bold text-uppercase mb-3">Log Out</h4>
+        <p class="m-0">Are you sure you want to log out?</p>
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-danger" type="submit">Log Out</button>
+        </form>
+
+    </div>
+</div>
+{% endblock chunk2 %}

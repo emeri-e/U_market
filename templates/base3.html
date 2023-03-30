@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block chunk1 %}
+<div class="col-lg-6 col-6 text-left">
+    <form action="{% url 'search_results' %}" method="get">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search for products, services or businesses">
+            <div class="input-group-append">
+                <button class="btn shadow-none ">
+                    <span class=" input-group-text bg-transparent text-primary">
+                        
+                        <i class="fa fa-search"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-lg-3 col-6 text-right">
+    <a href="{% url 'liked' %}" class="btn border">
+        <i class="fas fa-heart text-primary"></i>
+        <span class="badge">{{fav_number}}</span>
+    </a>
+    <a href="{% url 'cart' %}" class="btn border">
+        <i class="fas fa-shopping-cart text-primary"></i>
+        <span class="badge">{{cart_number}}</span>
+    </a>
+</div>
+{% endblock chunk1 %}
+
+
+{% block chunk2 %}
+
+<!-- Navbar Start -->
+<div class="container-fluid mb-5">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Categories</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown">Body wears<i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                            <a href="{%  url 'category_search' category='Men Body wears'  %}" class="dropdown-item">Men Body wears</a>
+                            <a href="{%  url 'category_search' category='Women Body wears'  %}" class="dropdown-item">Women Body wears</a>
+                            <a href="{%  url 'category_search' category='Unisex Body wears'  %}" class="dropdown-item">Unisex Body wears</a>
+                        </div>
+                    </div>
+                    <a href="{%  url 'category_search' category='Electronics'  %}" class="nav-item nav-link">Electronics</a>
+                    <a href="{%  url 'category_search' category='Food'  %}" class="nav-item nav-link">Food</a>
+                    <a href="{%  url 'category_search' category='Educational'  %}" class="nav-item nav-link">Educational</a>
+                    <a href="{%  url 'category_search' category='Sports'  %}" class="nav-item nav-link">Sports</a>
+                    <a href="{%  url 'category_search' category='Others'  %}" class="nav-item nav-link">Others</a>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown">Services<i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                            <a href="{%  url 'service_category_search' category='Cleaning'  %}" class="dropdown-item">Cleaning</a>
+                            <a href="{%  url 'service_category_search' category='Others'  %}" class="dropdown-item">Others</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <a href="{% url 'home' %}" class="nav-item nav-link {% block home %}{% endblock %}">Home</a>
+                        <a href="{% url 'Buz_list' %}" class="nav-item nav-link {% block business %}{% endblock %}">Business</a>
+                        <a href="{% url 'service_list' %}" class="nav-item nav-link {% block services %}{% endblock %}">Services</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle {% block pages %}{% endblock %}" data-toggle="dropdown" >Pages</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="{% url 'cart' %}" class="dropdown-item">Shopping Cart</a>
+                                <a href="checkout.html" class="dropdown-item">Checkout</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link" {% block contact %}{% endblock %}>Contact</a>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="navbar-nav ml-auto py-0">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-toggle="dropdown">{{user.email}}<i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                <a href="{% url 'profile_detail' Puuid=user.profile.Puuid %}" class="nav-item nav-link">View profile</a>
+                                <a href="{% url 'account_logout' %}" class="nav-item nav-link">Logout</a>
+
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+
+                    {% else %}
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="{% url 'account_login' %}" class="nav-item nav-link">Login</a>
+                        <a href="{% url 'account_signup' %}" class="nav-item nav-link">Register</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </nav>
+            <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="height: 410px;">
+                        <img class="img-fluid" src="{% static 'img/carousel-1.jpg' %}" alt="Image">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height: 410px;">
+                        <img class="img-fluid" src="{% static 'img/carousel-2.jpg' %}" alt="Image">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                        <span class="carousel-control-prev-icon mb-n2"></span>
+                    </div>
+                </a>
+                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                        <span class="carousel-control-next-icon mb-n2"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+
+{% block chunk3 %}{% endblock chunk3 %}
+{% endblock chunk2 %}
+

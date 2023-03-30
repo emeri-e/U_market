@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block chunk2 %}
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 500px">
+        <h3 class="font-weight-semi-bold text-uppercase mb-3">Sign Up</h3>
+        
+        <form method="post" >
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn-primary" type="submit">Log In</button>
+        </form>
+        <p class="m-0" >Do you already have an account? <a href="{% url 'account_login' %}"> Log In</a></p>
+
+    </div>
+</div>
+{% endblock chunk2 %}

@@ -1,0 +1,27 @@
+{% extends "base2.html" %}
+{% load static %}
+
+{% block chunk3 %}
+<h1>Product business</h1>
+{% for business in business_list %}
+<p></p>
+<p>{{business.name}}</p>
+<p></p>
+<p>{{business.description}}</p>
+<p></p>
+<p><a href="{% url 'Buz_detail' pk=business.id %}">view detail</a></p>
+<p></p>
+{% endfor %}
+
+<h1>Service business</h1>
+
+{% for business in service_business_list %}
+<p></p>
+<p>{{business.name}}</p>
+<p></p>
+<p>{{business.description}}</p>
+<p></p>
+<p><a href="{% url 'ServiceBuz_detail' pk=business.id %}">view detail</a></p>
+<p></p>
+{% endfor %}
+{% endblock chunk3 %}

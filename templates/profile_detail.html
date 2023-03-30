@@ -1,0 +1,49 @@
+{% extends "base2.html" %}
+
+{% block chunk3 %}
+<p>name: {{profile.user.username}}</p>
+<p>phone:    {{profile.phone}} </p>
+<p>last_seen:    {{profile.last_seen}}</p>
+    <p>username:    {{profile.username}}</p>
+        <p>firstname:        {{profile.firstname}}</p>
+            <p>lastname:            {{profile.lastname}}</p>
+                <p>email:                {{profile.email}}</p>
+                    <p>date_of_birth:                    {{profile.date_of_birth}}</p>
+                    {% if profile.photo %}
+                        <p>photo:   <img src="{{profile.photo.url}}" alt="pics is here" style="width: 50px;"></p> 
+                        
+                    {% endif %}
+                        
+                        <p></p>
+                        <P><a href="{% url 'profile_edit' Puuid=user.profile.Puuid %}">Edit Profile</a></P>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        {% if not profile.user.business %}
+                        <P><a href="{% url 'Buz_create' %}">create new business</a></P>
+                        {% else %}
+                        <h3>Business</h3>
+                        
+                        <p></p>
+                        <p>{{profile.user.business.name}}</p>
+                        <P><a href="{% url 'Buz_detail' pk=profile.user.business.id %}">view business</a></P>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        {% endif %}
+
+                        {% if not profile.user.service_business %}
+                        <p>are you a service renderer?</p>
+                        <P><a href="{% url 'ServiceBuz_create' %}">create new business</a></P>
+                        {% else %}
+                        <h3>Service Business</h3>
+                        
+                        <p></p>
+                        <p>{{profile.user.service_business.name}}</p>
+                        <P><a href="{% url 'ServiceBuz_detail' pk=profile.user.service_business.id %}">view business</a></P>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        {% endif %}
+
+{% endblock chunk3 %}
